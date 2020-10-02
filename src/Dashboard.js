@@ -51,13 +51,14 @@ export default function Dashboard() {
     const { allChats, sendChatAction, user} = React.useContext(CTX);
     // console.log({ allChats })
     const topics = Object.keys(allChats);
-
+    
+const [textValue, changeTextValue] = React.useState('');
     //local state
 
     const [activeTopic, changeActiveTopic] = React.useState(topics[0]);
 
 
-    const [textValue, changeTextValue] = React.useState('');
+    
 
     return (
         <div>

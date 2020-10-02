@@ -6,15 +6,12 @@ app.get('/', (req, res) => {
   res.send('<h1>Hello world</h1>');
 });
 
-io.on('connection', function (socket) {
-  console.log('a user connected')
-  socket.on('connection', (socket) => {
-    socket.on('chat message', (msg) => {
-      console.log('message: ' + JSON.stringify(msg));
-      io.emit('chat message', msg)
-    });
+io.on('connection', (socket) => {
+  console.log('a user connected');
+  socket.on('chat message', (msg) => {
+    console.log('message: ' + JSON.stringify(msg));
+    io.emit('chat message', msg);
   });
-
 });
 
 http.listen(3001, () => {

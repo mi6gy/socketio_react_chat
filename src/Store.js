@@ -23,7 +23,7 @@ function reducer(state, action) {
     const { from, msg, topic } = action.payload;
 
     switch (action.type) {
-        case 'RECEIVE_MESSAGE':
+        case "RECEIVE_MESSAGE":
             return {
                 ...state,
                 [topic]: [
@@ -38,13 +38,9 @@ function reducer(state, action) {
 
 let socket;
 
-
 function sendChatAction(value) {
-
     socket.emit('chat message', value);
-
 }
-
 
 export default function Store(props) {
 
@@ -52,14 +48,10 @@ export default function Store(props) {
 
     if (!socket) {
         socket = io(':3001')
-        socket.on('chat message', function (msg) {
-            dispatch({type:'RECEIVE_MESSAGE', payload: msg})
-        });
+        socket.on('chat message', function(msg){
+            dispatch({type:"RECEIVE_MESSAGE", payload: msg})
+          });
     }
-
-
-
-
     const user = "Miguel" + Math.random(100).toFixed(2);
 
     return (
