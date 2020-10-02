@@ -10,7 +10,7 @@ import Chip from '@material-ui/core/Chip';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 
-import {CTX} from "./Store";
+import { CTX } from "./Store";
 
 
 const useStyles = makeStyles(theme => ({
@@ -48,13 +48,13 @@ export default function Dashboard() {
     const classes = useStyles();
 
     //CTX storage
-const {allChats} = React.useContext(CTX);
-console.log({allChats})
-const topics = Object.keys(allChats);
+    const { allChats, sendChatAction } = React.useContext(CTX);
+    console.log({ allChats })
+    const topics = Object.keys(allChats);
 
-//local state
+    //local state
 
-const [activeTopic, changeActiveTopic] = React.useState(topics[0]);
+    const [activeTopic, changeActiveTopic] = React.useState(topics[0]);
 
 
     const [textValue, changeTextValue] = React.useState('');
@@ -90,7 +90,7 @@ const [activeTopic, changeActiveTopic] = React.useState(topics[0]);
                     </div>
                     <div className={classes.chatWindow}>
                         {
-                            allChats[activeTopic    ].map((chat, i) => (
+                            allChats[activeTopic].map((chat, i) => (
                                 <div className={classes.flex} key={i} >
 
                                     <Chip label={chat.from} className={classes.chip} />
@@ -107,14 +107,23 @@ const [activeTopic, changeActiveTopic] = React.useState(topics[0]);
                 </div>
                 <div className={classes.flex}>
                     <TextField
-                    label="Name"
-                    className={classes.chatBox}
-                    value={textValue}   
-                    onChange={e => changeTextValue(e.target.value)}
-                
+                        label="Name"
+                        className={classes.chatBox}
+                        value={textValue}
+                        onChange={e => changeTextValue(e.target.value)}
+
                     />
-                    
-                <Button color="primary">Send</Button>
+
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        className={classes.button}
+                        onClick={() =>{
+                            sendChatAction(textValue);
+                            changeTextValue("");
+                        }}
+                    >
+                        Send</Button>
                 </div>
 
             </Paper>

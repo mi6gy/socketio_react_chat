@@ -38,6 +38,14 @@ function reducer(state, action) {
 
 let socket;
 
+
+function sendChatAction(value){
+
+    socket.emit('chat-msg', value);
+
+}
+
+
 export default function Store(props) {
 
     if (!socket){
@@ -50,8 +58,12 @@ export default function Store(props) {
 
 
     return (
-        <CTX.Provider value={{allChats}}>
+        <CTX.Provider value={{allChats, sendChatAction}}>
+
             {props.children}
+
         </CTX.Provider>
     )
 }
+
+
